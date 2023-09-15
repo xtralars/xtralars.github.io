@@ -1,0 +1,258 @@
+header{
+    background-color: #004E89;
+    top: 0;
+    border-bottom: 1px solid #9DD1F1;
+    
+}
+
+  
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;            /* Footer height */
+    background-color: rgb(0, 78, 137);
+    border-top: 1px solid #9DD1F1;
+  }
+body {
+    background-color: rgb(255, 255, 255);
+    margin: 0px;
+    
+  }
+.dark-mode{
+    background-color: rgb(0, 78, 137);
+    margin: 0px;
+    
+
+}
+a:hover{
+  cursor: pointer;
+  background-color: #ffffff;
+}
+.button{
+    background-color: #9DD1F1;
+    border-radius: 3px;
+    color: #004E89;
+    font-family: 'Yantramanav', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    display: inline-block;
+    margin: 10px;
+    padding: 12px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid black;
+    
+
+    
+}
+.button:hover{
+  cursor: pointer;
+  background-color:#ffffff;
+}
+
+  h1 {
+    color: #ffffff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, sans-serif;
+    font-size: 50px;
+    font-weight: 400;
+    margin: 0;
+    text-align: center;
+  }
+  
+  h2 {
+    color: #AAA;
+    font-family: 'Yantramanav', sans-serif;
+    font-size: 16px;
+    font-weight: 100;
+    letter-spacing: 2px;
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  
+  p {
+    color: #ffffff;
+    font-family: 'Yantramanav', sans-serif;
+    font-size: 16px;
+    font-weight: 100;
+    margin: 0;
+    text-align: center;
+  }
+  
+  .actions {
+    text-align: center;
+    margin-top: 30px;
+    
+  }
+  
+  .actions a {
+    background-color: #9DD1F1;
+    border-radius: 3px;
+    color: #004E89;
+    font-family: 'Yantramanav', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    display: inline-block;
+    margin: 10px;
+    padding: 12px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid black;
+  }
+  .actions a:hover{
+    background-color: #ffffff;
+  }
+  
+  #gameboard {
+    display: flex;
+    justify-content: space-around;
+    /*align-items: baseline;*/
+    flex-wrap: wrap;
+    padding: 10px;
+    gap: 2rem;
+    border: 0px solid #004E89;
+    /*flex-basis: 0;*/
+    max-width: 1200px;
+    margin: auto;
+
+
+
+    /*position: relative;
+    text-align: center;
+    top: 30px;
+    
+    max-width: 1000px;
+    margin: auto;*/
+  }
+  .dagensgameboard{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 10px;
+    gap: 2rem;
+    border: 0px solid #004E89;
+    /*flex-basis: 0;*/
+    max-width: 1200px;
+    margin: auto;
+  } 
+  
+  .card {
+    
+    border: 2px solid #9DD1F1;
+    /*display: inline-block;*/
+    flex-grow: 1;
+    flex-shrink: 1;
+    height: 200px;
+    margin-top: 10px;
+    padding: 30px auto;
+    text-align: center;
+    width: 215px;
+    background-color: #9DD1F1;
+    
+  }
+  
+  .card:hover {
+    background-color: #004E89;
+    border-color: #9DD1F1;
+    cursor: pointer;
+
+  }
+
+  .dagenscard{
+    border: 2px solid #9DD1F1;
+    justify-content: center;
+    flex-grow: 1;
+    flex-shrink: 1;
+    max-height: 500px;
+    margin-top: 100px;
+    padding: 30px auto;
+    text-align: center;
+    max-width: 500px;
+    background-color: #9DD1F1;
+
+  }
+  .dagenscard:hover{
+    background-color: #004E89;
+    border-color: #9DD1F1;
+    cursor: pointer;
+  }
+
+
+
+
+
+
+  .card:active .backcard{
+    transform: rotateY(180deg);
+  }
+  
+  .card img {
+    padding-top: 40px;
+  }
+  .card h1{
+    padding-top: 50px;
+    
+  }
+  .dagenscard h1{
+    padding: 200px 200px;
+    font-size: 100px;
+  }
+  .snowflake {
+    color: #fff;
+    font-size: 1em;
+    font-family: Arial;
+    text-shadow: 0 0 1px #000;
+  }
+  @-webkit-keyframes snowflakes-fall{0%{top:-10%}100%{top:100%}}@-webkit-keyframes snowflakes-shake{0%,100%{-webkit-transform:translateX(0);transform:translateX(0)}50%{-webkit-transform:translateX(80px);transform:translateX(80px)}}@keyframes snowflakes-fall{0%{top:-10%}100%{top:100%}}@keyframes snowflakes-shake{0%,100%{transform:translateX(0)}50%{transform:translateX(80px)}}.snowflake{position:fixed;top:-10%;z-index:9999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default;-webkit-animation-name:snowflakes-fall,snowflakes-shake;-webkit-animation-duration:10s,3s;-webkit-animation-timing-function:linear,ease-in-out;-webkit-animation-iteration-count:infinite,infinite;-webkit-animation-play-state:running,running;animation-name:snowflakes-fall,snowflakes-shake;animation-duration:10s,3s;animation-timing-function:linear,ease-in-out;animation-iteration-count:infinite,infinite;animation-play-state:running,running}.snowflake:nth-of-type(0){left:1%;-webkit-animation-delay:0s,0s;animation-delay:0s,0s}.snowflake:nth-of-type(1){left:10%;-webkit-animation-delay:1s,1s;animation-delay:1s,1s}.snowflake:nth-of-type(2){left:20%;-webkit-animation-delay:6s,.5s;animation-delay:6s,.5s}.snowflake:nth-of-type(3){left:30%;-webkit-animation-delay:4s,2s;animation-delay:4s,2s}.snowflake:nth-of-type(4){left:40%;-webkit-animation-delay:2s,2s;animation-delay:2s,2s}.snowflake:nth-of-type(5){left:50%;-webkit-animation-delay:8s,3s;animation-delay:8s,3s}.snowflake:nth-of-type(6){left:60%;-webkit-animation-delay:6s,2s;animation-delay:6s,2s}.snowflake:nth-of-type(7){left:70%;-webkit-animation-delay:2.5s,1s;animation-delay:2.5s,1s}.snowflake:nth-of-type(8){left:80%;-webkit-animation-delay:1s,0s;animation-delay:1s,0s}.snowflake:nth-of-type(9){left:90%;-webkit-animation-delay:3s,1.5s;animation-delay:3s,1.5s}.snowflake:nth-of-type(10){left:25%;-webkit-animation-delay:2s,0s;animation-delay:2s,0s}.snowflake:nth-of-type(11){left:65%;-webkit-animation-delay:4s,2.5s;animation-delay:4s,2.5s}
+
+
+
+  /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 200px;
+  border: 1px solid #f1f1f1;
+  
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+  background-color: dodgerblue;
+  color: white;
+  transform: rotateY(180deg);
+}
