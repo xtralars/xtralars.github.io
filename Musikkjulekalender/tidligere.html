@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <title>Musikkjulekalender</title>
+  <link href="https://fonts.googleapis.com/css?family=Yantramanav:100,300,400,500,700,900" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/CSS/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  
+
+  
+</head>
+
+<body>
+    <header>
+      <div class="toggle_btn">
+        <li><a onclick="myFunction()"><i class="fas fa-moon"></i></a></li>
+      </div>
+    <h1>Musikkjulekalender</h1>
+    <div class="login_btn">
+      <li><a href="#">Login</a></li>
+    </div>
+     
+    
+  <!-- <div class="actions">
+    <a class="button" >Tidligere oppgaver</a>
+    <a href="memory.html" class="button">Dagens oppgave</a>
+    <a href="#">Ledertavle</a>
+    <button class="button" onclick = "myFunction()">Dark Mode</button>
+  </div> --->
+
+  <div class="navbar">
+  <ul class="links">
+    <li><a href="memory.html">Tidligere oppgaver</a></li>
+    <li><a href="index.html">Dagens oppgave</a></li>
+    <li><a href="ledertavle.html">Ledertavle</a></li>
+    
+
+    
+
+  </ul>
+ 
+  
+</div>
+    </header>
+    
+    
+    <div id="gameboard">
+      <div class="flipcard">
+        <div class="flipcard_inner">
+          <div class="flipcard_face flipcard_face--front">
+            <h1>1</h1>
+          </div>
+          <div class="flipcard_face flipcard_face--back">
+            <div class="flipcard_content">
+              <div class="flipcard_header">
+                <h1>Header tekst</h1>
+        
+              </div>
+              <div class="flipcard_body">
+                <h2>Underheader</h2>
+                  <audio id="song"><source src="lofi.mp3" type="audio/mp3" ></audio>
+                  <div class="input">
+                    <input type="range" value="0" min="0" max="67" id="progress">
+                  </div>
+                  <div class="controls">
+                    <div onclick="playPause()"><i class="fas fa-play" id="ctrlIcon" ></i></div>
+                  </div>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    Laudantium assumenda accusantium qui laboriosam dolor.</p>
+                  <div class="form"><form>
+                    <input type="text" id="svar">
+                    <input type="button" id="svarknapp" value="Svar"><br>
+
+                  </form>
+                </div>
+                                   
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        </div>
+        
+
+
+        
+  
+
+
+
+
+
+
+    <div class="snowflakes" aria-hidden="true">
+        <div class="snowflake">
+        ❅
+        </div>
+        <div class="snowflake">
+        ❅
+        </div>
+        <div class="snowflake">
+        ❆
+        </div>
+        <div class="snowflake">
+        ❄
+        </div>
+        <div class="snowflake">
+        ❅
+        </div>
+        <div class="snowflake">
+        ❆
+        </div>
+        <div class="snowflake">
+        ❄
+        </div>
+        <div class="snowflake">
+        ❅
+        </div>
+        <div class="snowflake">
+        ❆
+        </div>
+        <div class="snowflake">
+        ❄
+        </div>
+      </div>
+  
+  
+  
+
+
+      <script src="myScript.js"></script>        
+
+<footer id="footer"><p>Created by: Lars Erik Andersen</p></footer>      
+</body>
+</html> 
