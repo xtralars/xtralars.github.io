@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="CSS/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div id="pagetop">
+        <div class="nav_btns">
+            <button class="dark_mode"><i class="fas fa-moon"></i></button>
+            <button class="leaderboard_btn" id="leaderboard_btn" style.display='none'>Leaderboard</button>
+            <div class="login_signup">
+                <button class="login_btn" onclick = "document.getElementById('signInModal').style.display='block'" style = "width: auto;" >Login</button>
+                <button class="signup_btn" onclick = "document.getElementById('registerModal').style.display='block'" style = "width: auto;">Signup</button>
+            </div>
+        </div>
+    </div>
+    <div id="signInModal" class="modal">
+      <span onclick="document.getElementById('signInModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <form class="modal-content" id="loginForm">
+        <div class="container">
+          <!-- Username -->
+          <h3>Login:</h3>
+          <label for="uname"><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" name="uname" id="userEmail" required>
+          <!-- Password -->
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" id="userPassword" required>
+          <p id="forgotpwrd"><a href="#">Forgot password?</a></p>
+          <!-- Submit Button -->
+          <button type="submit" id="signInButton">Login</button>
+          <p id="register">New user? Click here to <a href="#">register.</a></p>
+        </div>
+      </form>
+    </div>
+    
+    <div id="registerModal" class="modal">
+      <span onclick="document.getElementById('registerModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <form class="modal-content" id="registerForm">
+        <div class="container">
+          <!-- Username -->
+          <h3>Register:</h3>
+          <label for="uname"><b>Username</b></label>
+          <input type="email" placeholder="Enter email" name="uname" id="registerEmail" required>
+          <!-- Password -->
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" id="registerPassword" required>
+          
+          <!-- Submit Button -->
+          <button type="submit" id="signUpButton">Register</button>
+          
+        </div>
+      </form>
+    </div>
+    
+
+  <div id="gameboard">
+    <div class="card">
+      
+      <div class="card_body">
+        <h2 id="opgHead">Luke 1</h2>
+          <audio controls id="song"><source id="audioSource" type="audio/mp3" ></audio>
+          
+          
+          <p id="opgText">Oppgave tekst</p>
+          <div class="form">
+            <form>
+              <input type="text" id="guessInput">
+              <button id="submitGuess">Svar</button><br>
+                <p id="message"></p>
+
+            </form>
+        </div>
+                           
+      </div>
+  </div>
+  </div>
+
+
+
+     <script type="module" src="JS/firebase.js"></script> 
+    <script type="module" src="JS/auth.js"></script>
+    <script src="JS/oppgaver.js"></script>
+      <script src="JS/myScript.js"></script>
+</body>
+</html>

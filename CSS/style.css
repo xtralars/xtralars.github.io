@@ -1,0 +1,466 @@
+:root {
+  --primary-color: #c56058;
+  --secondary-color:#dfdedf;
+  --tertiery-color: #7f97a8;
+  --accent-color: #aaa18e;
+  --text-color:   #dfdedf;
+  --pink-color: #e9c7c2;
+  --dark-mode: #30393f;
+}
+/*Palette HEX codes: #efdfd7, #c84d4e, #869987, #c0ced7, #717d8a  */
+/*Palette HEX codes: #e9c7c2, #c56058, #7f97a8, #aaa18e, #dfdedf  */
+/*Header*/
+header{
+    background-color: var(--tertiery-color);
+    top: 0;
+    
+    position: relative;
+}
+.navbar .a{
+  font-size: 20rem;
+  font-weight: bold;
+}
+.navbar .links{
+  display: flex;
+  flex-wrap: wrap;
+  
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.toggle_btn {
+  position: absolute;
+  top: 0; /* Aligns the element to the top of the header */
+  left: 0; /* Aligns the element to the right of the header */
+  padding: 10px; /* Add padding for spacing */
+}
+.login_btn{
+  position: absolute;
+  top: 0; /* Aligns the element to the top of the header */
+  right: 0; /* Aligns the element to the right of the header */
+  padding: 10px; /* Add padding for spacing */
+}
+li:hover{
+  background-color: var(--secondary-color);
+  scale: 1.05;
+  cursor: pointer;
+}
+    
+li{
+  list-style: none;
+  background-color: var(--secondary-color);
+  border: 1px solid var(--accent-color);
+  border-radius: 16px;
+  
+  margin: 10px;
+    padding: 10px;
+}
+/*.navbar{
+  width: 100%;
+  height: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}*/
+
+/*Dropdown Menu*/
+.dropdown_menu{
+  position: absolute;
+  right: 2rem;
+  top: 60px;
+  width:300px;
+  background: rgba(255, 255, 255, 0.1);
+  
+
+}
+
+a{
+  text-decoration: none;
+  color: var(--tertiery-color);
+  font-size: 1.5rem;
+  font-family: 'Yantramanav', sans-serif;
+}
+/*a:hover{
+  cursor: pointer;
+  background-color: #ffffff;
+}*/
+
+/*Footer*/  
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;            /* Footer height */
+    background-color: var(--tertiery-color);
+    
+  }
+
+/*Body*/
+body {
+    background-color: var(--secondary-color);
+    margin: 0px;
+    
+  }
+  /*Set dark mode color*/
+.dark-mode{
+    background-color: var(--dark-mode);
+    margin: 0px;
+}
+/*Buttons*/
+.button{
+    background-color: #9DD1F1;
+    border-radius: 3px;
+    color: #004E89;
+    font-family: 'Yantramanav', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    display: inline-block;
+    margin: 10px;
+    padding: 12px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid black;   
+}
+.button:hover{
+  cursor: pointer;
+  background-color:#ffffff;
+}
+
+  h1 {
+    color: var(--secondary-color);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, sans-serif;
+    font-size: 50px;
+    font-weight: 400;
+    margin: 0;
+    text-align: center;
+  }
+  h3{
+    color: var(--pink-color);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, sans-serif;
+    font-size: 50px;
+    font-weight: 400;
+    margin: 0;
+    text-align: center;
+  }
+  
+  h2 {
+    color: var(--secondary-color);
+    font-family: 'Yantramanav', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  h5{
+    color: var(--secondary-color);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    margin: 0;
+    text-align: center;
+  }
+  
+  p {
+    color: var(--text-color);
+    font-family: 'Yantramanav', sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+    margin: 0;
+    text-align: center;
+  }
+  
+
+  
+  #gameboard {
+    display: flex;
+    justify-content: space-around;
+    /*align-items: baseline;*/
+    flex-wrap: wrap-reverse;
+    flex-direction: row-reverse;
+    padding: 10px;
+    gap: 2rem;
+    border: 0px solid #004E89;
+    /*flex-basis: 0;*/
+    max-width: 1200px;
+    margin: auto;
+
+
+
+    /*position: relative;
+    text-align: center;
+    top: 30px;
+    
+    max-width: 1000px;
+    margin: auto;*/
+  }
+
+#gameboard_former{
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  gap: 1rem;
+  
+  flex-wrap: wrap-reverse;
+  flex-direction: row-reverse;
+  max-width:  1200px;
+  
+}
+  .dagensgameboard{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    
+    padding: 10px;
+    gap: 1rem;
+    border: 0px solid #004E89;
+    /*flex-basis: 0;*/
+    max-width: 1200px;
+    margin: auto;
+  } 
+  
+  
+
+
+
+
+
+
+
+
+  
+  .snowflake {
+    color: #fff;
+    font-size: 1em;
+    font-family: Arial;
+    text-shadow: 0 0 1px #000;
+  }
+  @-webkit-keyframes snowflakes-fall{0%{top:-10%}100%{top:100%}}
+  @-webkit-keyframes snowflakes-shake{0%,100%{-webkit-transform:translateX(0);transform:translateX(0)}50%{-webkit-transform:translateX(80px);transform:translateX(80px)}}
+  @keyframes snowflakes-fall{0%{top:-10%}100%{top:100%}}
+  @keyframes snowflakes-shake{0%,100%{transform:translateX(0)}50%{transform:translateX(80px)}}
+  .snowflake{position:fixed;top:-10%;z-index:9999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default;-webkit-animation-name:snowflakes-fall,snowflakes-shake;-webkit-animation-duration:10s,3s;-webkit-animation-timing-function:linear,ease-in-out;-webkit-animation-iteration-count:infinite,infinite;-webkit-animation-play-state:running,running;animation-name:snowflakes-fall,snowflakes-shake;animation-duration:10s,3s;animation-timing-function:linear,ease-in-out;animation-iteration-count:infinite,infinite;animation-play-state:running,running}
+  .snowflake:nth-of-type(0){left:1%;-webkit-animation-delay:0s,0s;animation-delay:0s,0s}
+  .snowflake:nth-of-type(1){left:10%;-webkit-animation-delay:1s,1s;animation-delay:1s,1s}
+  .snowflake:nth-of-type(2){left:20%;-webkit-animation-delay:6s,.5s;animation-delay:6s,.5s}
+  .snowflake:nth-of-type(3){left:30%;-webkit-animation-delay:4s,2s;animation-delay:4s,2s}
+  .snowflake:nth-of-type(4){left:40%;-webkit-animation-delay:2s,2s;animation-delay:2s,2s}
+  .snowflake:nth-of-type(5){left:50%;-webkit-animation-delay:8s,3s;animation-delay:8s,3s}
+  .snowflake:nth-of-type(6){left:60%;-webkit-animation-delay:6s,2s;animation-delay:6s,2s}
+  .snowflake:nth-of-type(7){left:70%;-webkit-animation-delay:2.5s,1s;animation-delay:2.5s,1s}
+  .snowflake:nth-of-type(8){left:80%;-webkit-animation-delay:1s,0s;animation-delay:1s,0s}
+  .snowflake:nth-of-type(9){left:90%;-webkit-animation-delay:3s,1.5s;animation-delay:3s,1.5s}
+  .snowflake:nth-of-type(10){left:25%;-webkit-animation-delay:2s,0s;animation-delay:2s,0s}
+  .snowflake:nth-of-type(11){left:65%;-webkit-animation-delay:4s,2.5s;animation-delay:4s,2.5s}
+
+
+
+  /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flipcard {
+  margin: 50px auto 50px;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  
+}
+.flipcard_fasit{
+  margin: 25px auto 25px;
+  width: 300px;
+  height: 300px;
+  display: flex;
+}
+
+/* This container is needed to position the front and back side */
+.flipcard_inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flipcard_inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+
+.flipcard_face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0px 3px 18px 3px rgba(0,0,0,0.2);
+}
+
+/* Style the front side (fallback if image is missing) */
+.flipcard_face--front {
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flipcard_face--front h1{
+  color: var(--secondary-color);
+}
+
+/* Style the back side */
+.flipcard_face--back {
+  background-image: linear-gradient(to bottom right, var(#004e89), var(#9dd1f1));
+  transform: rotateY(180deg);
+}
+.flipcard_content{
+  width: 100%;
+  height: 100%;
+}
+.flipcard_header{
+  position: relative;
+  padding: 30px 40px;
+  background-color: var(--primary-color);
+}
+.flipcard_header:after{
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+
+}
+.flipcard_body{
+  background-color: var(--tertiery-color);
+  height: 100%;
+  width: 100%;
+}
+#progress{
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  background: var(--secondary-color);
+  border-radius: 40px;
+  cursor: pointer;
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+#progress::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  background: var(--accent-color);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+#progress::-webkit-slider-thumb:hover{
+  scale: 2;
+}
+.controls div{
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  background: var(--text-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--tertiery-color);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+
+}
+.controls div:hover{
+  scale: 1.05;
+}
+/*Form-og-svar*/
+.form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+
+}
+#submitGuess{
+  background-color: var(--accent-color) ;
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+  display: inline-flex;
+  padding: 10px 25px;
+}
+#submitGuess:hover{
+  scale: 1.05;
+  cursor: pointer;
+}
+#guessInput{
+  background-color: var(--secondary-color);
+  border: 1px solid var(--text-color);
+  padding: 10px 36px;
+}
+#guessInput:hover{
+  scale: 1.05;
+}
+
+#revealAnswer{
+  background-color: var(--accent-color) ;
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+  display: inline-flex;
+  padding: 10px 25px;
+
+}
+
+/*Login config*/
+.login_container{
+  display: flex;
+  justify-content: space-around;
+  /*align-items: baseline;*/
+  flex-wrap: wrap-reverse;
+  flex-direction: row-reverse;
+  padding: 10px;
+  gap: 2rem;
+  border: 0px solid #004E89;
+  /*flex-basis: 0;*/
+  max-width: 1200px;
+  margin: auto;
+}
+
+.auth_btn{
+  background-color: var(--accent-color) ;
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+  display: inline-flex;
+  padding: 10px 25px;
+}
+#login_container_header{
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+#login_header{
+  position: relative;
+  padding: 30px 40px;
+  background-color: var(--primary-color);
+}
+.login_container_input{
+  background-color: var(--tertiery-color);
+  height: 100%;
+  width: 100%;
+}
