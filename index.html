@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musikkjulekalender</title>
+    <link rel="stylesheet" type="text/css" href="CSS/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div id="pagetop">
+        <div class="nav_btns_left">
+            <button id="darkModeButton"><i class="fas fa-moon"></i></button>
+            <button id="infoButton" onclick = "document.getElementById('infoModal').style.display='block'"><i class="fas fa-question"></i></button>
+        </div>
+        <div class="nav_btns_center">
+            <button class="leaderboard_btn" id="leaderboard_btn" >Leaderboard</button>
+        </div>    
+        <div class="nav_btns_right">
+            <button class="login_btn" onclick = "document.getElementById('signInModal').style.display='block'" >Login</button>
+            <button class="signup_btn" onclick = "document.getElementById('registerModal').style.display='block'">Register</button> 
+        </div>
+        <div class="dropdown-menu">
+          <button class="dropbtn"><i class="fas fa-bars"></i></button>
+          <div class="dropdown-content">
+              <button id="darkModeButtonMobile"><i class="fas fa-moon"></i> Dark Mode</button>
+              <button id="infoButtonMobile"><i class="fas fa-question"></i> Info</button>
+              <button class="leaderboard_btn" id="leaderboard_btnMobile">Leaderboard</button>
+              <button class="login_btn" onclick="document.getElementById('signInModal').style.display='block'">Login</button>
+              <button class="signup_btn" onclick="document.getElementById('registerModal').style.display='block'">Register</button>
+          </div>
+      </div>
+    </div>
+    <div id="signInModal" class="modal">
+      <span onclick="document.getElementById('signInModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <form class="modal-content" id="loginForm">
+        <div class="container">
+          <!-- Username -->
+          <h3>Login:</h3>
+          <label for="uname"><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" name="uname" id="userEmail" required>
+          <!-- Password -->
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" id="userPassword" required>
+          <p id="forgotpwrd"><a href="#">Forgot password?</a></p>
+          <!-- Submit Button -->
+          <button type="submit" id="signInButton">Login</button>
+          <p id="register">New user? Click here to <a href="#">register.</a></p>
+        </div>
+      </form>
+    </div>
+    
+    <div id="registerModal" class="modal">
+      <span onclick="document.getElementById('registerModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <form class="modal-content" id="registerForm">
+        <div class="container">
+          <!-- Username -->
+          <h3>Register:</h3>
+          <label for="uname"><b>Username</b></label>
+          <input type="text" placeholder="Enter username" name="uname" id="registerUsername" required>
+          <!-- Email -->
+          <label for="email"><b>Email</b></label>
+          <input type="email" placeholder="Enter email" name="email" id="registerEmail" required>
+          <!-- Password -->
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" id="registerPassword" required>
+          
+          <!-- Submit Button -->
+          <button type="submit" id="signUpButton">Register</button>
+          
+        </div>
+      </form>
+    </div>
+
+    <div id="infoModal" class="modal">
+      <span onclick="document.getElementById('infoModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <form class="modal-content" id="registerForm">
+        <div class="container">
+          <!-- Username -->
+          <h3>Om kalenderen:</h3>
+          <h5>Ny oppgave hver dag.<br><br>
+              Dersom du gjetter feil 10 ganger, vil du få opp en knapp med et hint.<br>
+              Etter 20 forsøk, vil du få enda en knapp med hint.<br><br>
+              Med mindre det er spesifisert, så skal vi frem til låttittel. Små og store bokstaver er tatt høyde for, så det spiller ingen rolle.<br>
+              Det betyr at både "stairway to heaven", "Stairway To Heaven" og "StAiRwAy To HeAvEn" er godkjente svar.
+          </h5>
+          
+          
+          <!-- Submit Button -->
+          <button type="submit" href="#">Lukk</button>
+          
+        </div>
+      </form>
+    </div>
+    
+
+  <div id="gameboard">
+    <div class="card">
+      
+      <div class="card_body">
+        <h2 id="opgHead">Luke 1</h2>
+          <audio controls id="song"><source id="audioSource" src="" type="audio/mp3" ></audio>
+          
+          
+          <p id="opgText">Oppgave tekst</p>          
+          <div id="secretContent">
+            <button id="hintBtn1" class="hidden" style="display: none">Hint 1</button>
+            <button id="hintBtn2" class="hidden" style="display: none">Hint 2</button>
+
+          </div>
+          <p id="hintText1" class="hidden"></p>
+          <p id="hintText2" class="hidden"></p>
+          
+          
+          <div class="form">
+            <form>
+              <input type="text" id="guessInput">
+              <button id="submitGuess">Svar</button><br>
+                <p id="message"></p>
+              <div id="revealAnswer"></div>
+
+            </form>
+        </div>
+                           
+      </div>
+  </div>
+  </div>
+
+
+
+     <script type="module" src="JS/firebase.js"></script> 
+    <script type="module" src="JS/firebaseauth.js"></script>
+    <!--<script type="module" src="JS/oppgaver.js"></script>-->
+    <script type="module" src="JS/appoppgaver.js"></script>
+    <script src="JS/stylings.js"></script>
+</body>
+</html>
