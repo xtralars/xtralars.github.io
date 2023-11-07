@@ -102,10 +102,20 @@ text: 'Day 22 Text',
   },
   {
     luke: 'Luke 24',
-  audioURL: '/Resources/lofi.mp3',
-  text: 'Day 24 Text',
+  audioURL: 'Resources/lofi.mp3',
+  text: 'Dette er luke 24 sin oppgave tekst. Her kommer det muligens masse tekst',
   fasit: 'Lars',
+  hint1: 'Lars er kul',
+  hint2: 'Lars er mega kul',
     },
+    {
+      luke: 'Luke 25',
+    audioURL: 'Resources/lofi.mp3',
+    text: 'Dette er luke 25 sin oppgave tekst. Her kommer det muligens masse tekst',
+    fasit: 'Lars',
+    hint1: 'Lars er kul',
+    hint2: 'Lars er mega kul',
+      },
 
 
     
@@ -119,7 +129,7 @@ const currentDay = currentDate.getDate();
 const gameboard = document.getElementById('gameboard');
 
 // Check if the current day is within the range of 1 to 24
-if (currentDay >= 1 && currentDay <= 24) {
+if (currentDay >= 1 && currentDay <= 25) {
 const dayData = daysData[currentDay - 1]; // Adjust the index since arrays are 0-based
 
 // Update the audio source
@@ -133,6 +143,13 @@ opgText.textContent = dayData.text;
 const opgHead = document.getElementById('opgHead');
 opgHead.textContent = dayData.luke;
 
+
+
+const hint1 = document.getElementById('hintText1');
+hintText1.textContent = dayData.hint1;
+const hint2 = document.getElementById('hintText2');
+hintText2.textContent = dayData.hint2;
+
 // Store the correct answer in a variable
 const correctAnswer = dayData.fasit;
 
@@ -145,9 +162,9 @@ function checkGuess() {
   const message = document.querySelector('#message'); // Correct the querySelector
 
   if (inputGuess === correctAnswer) { // Compare user's input with the correct answer
-    message.textContent = 'Gratulerer!';
+    message.textContent = 'Gratulerer! ' + correctAnswer + ' er riktig.';
   } else {
-    message.textContent = 'Feil. Prøv igjen.';
+    message.textContent = inputGuess + ' er feil. Prøv igjen.';
   }
 }
 } else {
@@ -157,4 +174,21 @@ gameboard.textContent = 'Invalid day';
 
 
 
+let visHint1 = document.querySelector(".hidden1");
+let visHint2 = document.querySelector(".hidden2");
 
+function giveHint1(){
+  visHint1.classList.toggle("hidden1");
+  
+}
+function giveHint2(){
+  visHint2.classList.toggle("hidden2");
+  
+}
+
+const hintBtn1 = document.getElementById("hintBtn1");
+const hintBtn2 = document.getElementById("hintBtn2");
+
+hintBtn1.addEventListener('click', giveHint1);
+
+hintBtn2.addEventListener('click', giveHint2)
