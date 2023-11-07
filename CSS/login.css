@@ -109,6 +109,16 @@ input[type=text], input[type=password], input[type=email] {
     padding-top: 16px;
     }
 
+    .dark_mode{
+        background-color: rgb(38, 38, 55);
+        color: white;
+        
+    }
+    body{
+        background-color: white;
+    }
+
+
     #pagetop {
         position: relative;
         color: #fff; /* Set the text color */
@@ -116,16 +126,17 @@ input[type=text], input[type=password], input[type=email] {
         border-bottom: 1px solid black;
         max-width: 640px;
         margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         
     }
     
-    .nav_btns {
-        display: flex;
-        justify-content: space-between; /* Space items evenly horizontally */
-        align-items: center; /* Align items vertically in the center */
-    }
+  
     
-    .dark_mode {
+    
+    
+    #darkModeButton {
         background-color: #222; /* Set the background color of the dark mode button */
         color: #fff; /* Set the text color of the dark mode button */
         border: none;
@@ -134,19 +145,30 @@ input[type=text], input[type=password], input[type=email] {
         left: 0;
         width: 40px;
         border-radius: 50%;
+        
+    }
+    #infoButton{
+        background-color: #fefefe; /* Set the background color of the dark mode button */
+        color: black; /* Set the text color of the dark mode button */
+        border: solid 1px;
+        padding: 10px 10px;
+        cursor: pointer;
+        
+        width: 40px;
+        border-radius: 50%;
+        
     }
     
-    .login_signup {
-        display: flex;
-        gap: 10px; /* Add spacing between login and signup buttons */
-    }
+    
     .leaderboard_btn{
         
         border-radius: 16px;
         padding: 5px 10px;
         cursor: pointer;
         width: 100px;
-        display: none;
+        margin: auto;
+        
+        
 
     }
     
@@ -158,8 +180,67 @@ input[type=text], input[type=password], input[type=email] {
         padding: 5px 10px;
         cursor: pointer;
         border-radius: 16px;
+        margin-left: 0;
+        
     }
       
+/*dropdown menu*/
+
+/* Your existing styles for #pagetop, .nav_btns, and buttons */
+
+/* Dropdown menu container */
+.dropdown-menu {
+    display: none; /* Hide the dropdown by default */
+}
+
+/* Style the dropdown button */
+.dropbtn {
+    background-color: #222;
+    color: #fff;
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    width: 40px;
+    border-radius: 50%;
+}
+
+/* Style the dropdown content (the list of buttons) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fefefe;
+    min-width: 160px;
+    z-index: 1;
+}
+
+/* Show the dropdown content when the dropdown button is clicked */
+.dropdown-menu.active .dropdown-content {
+    display: block;
+}
+
+/* Media query to activate the dropdown menu at a certain screen width (e.g., for smartphones) */
+@media screen and (max-width: 200px) {
+    .nav_btns {
+        flex-direction: column;
+    }
+
+    .dropdown-menu.active {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .dropdown-menu.active .dropdown-content {
+        position: static;
+        display: none;
+        text-align: center;
+    }
+}
+
+
+
+
+
 
       #gameboard {
         display: flex;
@@ -171,9 +252,12 @@ input[type=text], input[type=password], input[type=email] {
         gap: 2rem;
         
         /*flex-basis: 0;*/
-        max-width: 1200px;
+        max-width: 100px;
         margin: auto;
         height: 100vh;
       }
 
       
+      .hidden{
+        display: none;
+      }
