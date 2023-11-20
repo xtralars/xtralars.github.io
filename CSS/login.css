@@ -1,0 +1,288 @@
+:root {
+    --primary-color: #c56058;
+    --secondary-color:#dfdedf;
+    --tertiery-color: #7f97a8;
+    --accent-color: #aaa18e;
+    --text-color:   #dfdedf;
+    --pink-color: #e9c7c2;
+    --dark-mode: #30393f;
+  }
+body{
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    background: linear-gradient(0deg, #bec0c5, rgb(92, 182, 228));
+}
+
+  .modal {
+    /* Hidden by default */
+    display: none;
+    /* Stay in place */
+    position: fixed;
+    /* Sit on top */
+    z-index: 1;
+    left: 0;
+    top: 0;
+    /* Full width and height */
+    width: 100%;
+    height: 100%;
+    /* Enable scrolling if needed */
+    overflow: auto;
+    /* Fallback color */
+    background-color: #000;
+    /* Black with opacity */
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+    }
+
+    /* Modal content/box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    border: 1px solid #888;
+    width: 400px;
+    }
+    /* The close button (x)*/
+    .close {
+    position: absolute;
+    right: 25px;
+    top: 0px;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+    }
+    .close:hover, .close:focus {
+    color: red;
+    cursor: pointer;
+    }
+    /* Add zoom animation */
+    .animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+    }
+    @-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0);}
+    to {-webkit-transform: scale(1);}
+    }
+    @keyframes animatezoom {
+    from {transform: scale(0);}
+    to {transform: scale(1);}
+    }
+    /* Full width input fields */
+input[type=text], input[type=password], input[type=email] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    }
+    /* Set a style for all buttons */
+    button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    }
+    button:hover {
+    opacity: 0.7;
+    }
+    /* For the cancel button */
+    .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+    }
+    /* Center the image and position the close button */
+    .imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+    }
+    img.avatar {
+    width: 40%;
+    border-radius: 50%;
+    }
+    .container {
+    padding: 16px;
+    }
+    span.psw {
+    float: right;
+    padding-top: 16px;
+    }
+
+    .dark_mode{
+        background-color: rgb(38, 38, 55);
+        color: white;
+        
+    }
+    body{
+        background-color: white;
+    }
+
+
+    #pagetop {
+        position: relative;
+        color: #fff; /* Set the text color */
+        padding: 10px; /* Add padding to the top bar */
+        border-bottom: 1px solid black;
+        max-width: 640px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+    }
+    
+  
+    
+    
+    
+    #darkModeButton {
+        background-color: #222; /* Set the background color of the dark mode button */
+        color: #fff; /* Set the text color of the dark mode button */
+        border: none;
+        padding: 10px 10px;
+        cursor: pointer;
+        left: 0;
+        width: 40px;
+        border-radius: 50%;
+        
+    }
+    #infoButton{
+        background-color: #fefefe; /* Set the background color of the dark mode button */
+        color: black; /* Set the text color of the dark mode button */
+        border: solid 1px;
+        padding: 10px 10px;
+        cursor: pointer;
+        
+        width: 40px;
+        border-radius: 50%;
+        
+    }
+    
+    
+    .leaderboard_btn, .page_btn{
+        
+        border-radius: 16px;
+        padding: 5px 10px;
+        cursor: pointer;
+        width: 100px;
+        margin: auto;
+        
+        
+
+    }
+    
+    .login_btn,
+    .signup_btn {
+        
+        color: #fff; /* Set the text color of login and signup buttons */
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 16px;
+        margin-left: 0;
+        width: auto;
+        
+    }
+      
+/*dropdown menu*/
+
+/* Your existing styles for #pagetop, .nav_btns, and buttons */
+
+/* Dropdown menu container */
+.dropdown-menu {
+    display: none; /* Hide the dropdown by default */
+}
+
+/* Style the dropdown button */
+.dropbtn {
+    background-color: #222;
+    color: #fff;
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    width: 40px;
+    border-radius: 50%;
+}
+
+/* Style the dropdown content (the list of buttons) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fefefe;
+    min-width: 160px;
+    z-index: 1;
+}
+
+/* Show the dropdown content when the dropdown button is clicked */
+.dropdown-menu.active .dropdown-content {
+    display: block;
+}
+
+/* Media query to activate the dropdown menu at a certain screen width (e.g., for smartphones) */
+@media screen and (max-width: 768px) {
+    .nav_btns {
+        flex-direction: column;
+    }
+
+    .dropdown-menu.active {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .dropdown-menu.active .dropdown-content {
+        position: static;
+        display: none;
+        text-align: center;
+    }
+}
+
+
+
+
+
+
+      #gameboard {
+        display: flex;
+        justify-content: space-around;
+        /*align-items: baseline;*/
+        flex-wrap: wrap-reverse;
+        flex-direction: row-reverse;
+        padding: 10px;
+        gap: 2rem;
+        
+        /*flex-basis: 0;*/
+        max-width: 100px;
+        margin: auto;
+        height: 100vh;
+      }
+
+      
+      .hidden{
+        display: none;
+      }
+
+      /*Confetti*/
+      @keyframes confetti {
+        0% {
+          transform: translateY(0) rotate(0deg);
+        }
+        100% {
+          transform: translateY(600px) rotate(360deg);
+        }
+      }
+      
+      .confetti {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: #ffffff; /* Snowflake color */
+        clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        animation: confetti 4s ease-out;
+      }
