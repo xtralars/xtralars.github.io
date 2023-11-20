@@ -76,4 +76,4 @@ function triggerConfetti() {
   }
 }
 
-export {triggerConfetti}
+
