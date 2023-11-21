@@ -20,7 +20,7 @@ const db = getDatabase(app);
 const storage = getStorage(app);
 let correctAnswerYesterday;
 let userPoints = 3;
-let revealAnswer = null;
+let revealAnswer;
 
 const currentDate = new Date();
 currentDate.setDate(currentDate.getDate() - 1); // Subtract 1 day to get yesterday's date
