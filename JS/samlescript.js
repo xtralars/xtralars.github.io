@@ -1,6 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js'
-import { getDatabase, set, ref, get, child } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js';
+import { getDatabase, set, ref, get, child, update } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js';
 import { getStorage, getDownloadURL, ref as storageRef } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-storage.js';
 
 
@@ -25,13 +25,48 @@ const storage = getStorage(app);
 let currentUserUsername;
 let userUID;
 
-// Sign up a user with email and password
-function closeModal(modalId) {
-    document.getElementById(modalId).style.display = 'none';
+onAuthStateChanged(auth, (user) => {
+  const loginBtn = document.getElementById('login_menu');
+  const registerBtn = document.getElementById('register_menu');
+  const logoutBtn = document.getElementById('logout-btn');
+  const opgCard = document.getElementById('opgCard');
+  const notLog = document.getElementById('notLog');
+  if (user) {
+    // User is signed in
+    
+    currentUserUsername = user.displayName; // assuming you set the display name during registration
+    userUID = user.uid;
+    updateContentForCurrentDay();
+
+    // Display the username on the page
+    document.getElementById('user-username').textContent = `Hei, ${currentUserUsername}`;
+    loginBtn.style.display = 'none';
+    registerBtn.style.display = 'none';
+    logoutBtn.style.display = 'block';
+    opgCard.style.display = 'block';
+    notLog.style.display = 'none';
+  } else {
+    // User is signed out
+    document.getElementById('user-username').textContent = 'Du er ikke logget inn';
+
+    loginBtn.style.display = 'block';
+    registerBtn.style.display = 'block';
+    logoutBtn.style.display = 'none';
+    opgCard.style.display = 'none';
+    notLog.style.display = 'block';
+
+    
   }
-  
-// Function to register or log in and redirect
-// Your existing code for authAndRedirect function
+});
+function logout() {
+  signOut(auth).then(() => {
+    // Sign-out successful
+    console.log('Logout successful!');
+  }).catch((error) => {
+    console.error('Logout error:', error);
+  });
+}
+
 async function authFirebase(email, password, username, isRegister) {
   try {
     const authFunction = isRegister
@@ -42,14 +77,16 @@ async function authFirebase(email, password, username, isRegister) {
     const user = userCredential.user;
     userUID = user.uid;
     currentUserUsername = user.username;
-    
-    
 
     if (isRegister) {
       // Additional registration logic if needed
       const userRef = child(dbref, `users/${user.uid}`);
-      await set(userRef, { uid: user.uid, username }); // Store UID and username
+      await set(userRef, { uid: user.uid, username, displayName: username }); // Store UID and username
+      await updateProfile(user, {displayName: username});
     }
+
+    updateContentForCurrentDay();
+    
 
     // Registration/Login and data storage successful
     // Close the modal
@@ -58,30 +95,16 @@ async function authFirebase(email, password, username, isRegister) {
     console.log(user);
     console.log(user.uid);
     console.log(currentUserUsername);
-
-    // Display the username if the user is logged in
-    if (!isRegister || user) {
-      const userRef = child(dbref, `users/${user.uid}`);
-      const snapshot = await get(userRef);
-      const userData = snapshot.val();
-      currentUserUsername = userData.username;
-
-      if (userData && userData.username) {
-        // Display the username on the page
-        document.getElementById('user-username').textContent = `Hei, ${userData.username}`;
-        console.log(userData.username);
-        currentUserUsername = userData.username;
-        console.log(currentUserUsername);
-        
-
-        
-      }
-    }
+    console.log(userUID);
   } catch (error) {
     console.error(isRegister ? 'Registration error:' : 'Login error:', error);
-    
   }
 }
+
+function closeModal(modalId) {
+  document.getElementById(modalId).style.display = 'none';
+}
+
 
 // Event listener for both registration and login
 function handleAuthButtonClick(isRegister) {
@@ -105,6 +128,9 @@ document.getElementById("register-btn").addEventListener("click", () => {
 document.getElementById("login-btn").addEventListener("click", () => {
   handleAuthButtonClick(false);
 });
+document.getElementById("logout-btn").addEventListener("click", () => {
+  logout();
+});
 
 
 
@@ -112,7 +138,7 @@ document.getElementById("login-btn").addEventListener("click", () => {
 
 const leaderboardRef = ref(db, 'leaderboard/');
 
-function updateUserScore(points, currentUserUsername) {
+function updateUserScore(userPoints, currentUserUsername) {
   const userScoreRef = child(leaderboardRef, currentUserUsername);
 
   return get(userScoreRef)
@@ -120,10 +146,10 @@ function updateUserScore(points, currentUserUsername) {
       if (snapshot.exists()) {
         // User already exists in the leaderboard, update the total score
         const currentScore = snapshot.val().score;
-        return update(userScoreRef, { score: currentScore + points });
+        return update(userScoreRef, { score: currentScore + userPoints });
       } else {
         // User doesn't exist, create a new entry with total score
-        return set(userScoreRef, { score: points });
+        return set(userScoreRef, { score: userPoints });
       }
     })
     .catch((error) => {
@@ -152,6 +178,7 @@ function displayLeaderboard() {
           const userData = childSnapshot.val();
           const username = childSnapshot.key;
           const score = userData.score;
+          
   
           const userEntry = document.createElement("div");
           userEntry.textContent = `${username}: ${score} poeng`;
@@ -171,16 +198,15 @@ function displayLeaderboard() {
   let correctAnswer;
   let userPoints = 3;
   let revealAnswer = null;
-  
-  // Function to update the content for a specific day
-  
-  
-  // Loop through all 24 days to update the container
+  let hasSubmittedCorrectAnswer = false;
   
   // Function to update the content for the current day
   async function updateContentForCurrentDay() {
       const currentDate = new Date();
       const currentDay = currentDate.getDate(); // Get the current day of the month
+
+      // Reset the flag when updating content for a new day
+      hasSubmittedCorrectAnswer = false;
   
       // Update the day number in the container's title
       document.getElementById("opgHead").textContent = `Luke ${currentDay}`;
@@ -194,7 +220,7 @@ function displayLeaderboard() {
           document.getElementById("opgText").textContent = dayData.quizText;
           document.getElementById("hintText1").textContent = dayData.hints.hint1;
           document.getElementById("hintText2").innerHTML = dayData.hints.hint2;
-          
+  
           correctAnswer = dayData.correctAnswer;
           revealAnswer = dayData.revealAnswer;
   
@@ -204,52 +230,106 @@ function displayLeaderboard() {
   
           const audioElement = document.getElementById("song");
           audioElement.src = audioURL;
+  
           // Get fasit from database
-          
+  
           const videoContainer = document.getElementById("revealAnswer");
           videoContainer.src = revealAnswer;
-          
-          
-  
-  
-         
-  
-  
-          
+
+        // Mark on the server that the user has not submitted a correct answer for the current day
+        const userId = getUserId();
+        markUserAsNotSubmittedCorrectAnswer(userId);
       }
   }
   
   // Call the function to update content for the current day
-  updateContentForCurrentDay();
-  
-  // Add this code at the beginning of the script to calculate yesterday's date
   
   
   // ...
   
- 
-  
-  function checkGuess() {
+  async function checkGuess() {
       event.preventDefault();
-      const inputGuess = document.querySelector('#guessInput').value.toLowerCase(); // Correct the querySelector and value access
-      const message = document.querySelector('#message'); // Correct the querySelector
-    
-      if (inputGuess === correctAnswer.toLowerCase()) { // Compare user's input with the correct answer
-        message.textContent = 'Gratulerer! ' + correctAnswer + ' er riktig.';
-        triggerConfetti();
-        revealAnswerToPage();
-        updateUserScore(userPoints, currentUserUsername);
-        displayLeaderboard();
-      } else {
-        message.textContent = inputGuess + ' er feil. Prøv igjen.';
-        
+      const inputGuess = document.querySelector('#guessInput').value.toLowerCase();
+      const message = document.querySelector('#message');
+  
+      // Assuming you have a user ID
+      const userId = getUserId(); // Replace with your actual function to get the user ID
+  
+      try {
+          // Check on the server if the user has already submitted a correct answer for the current day
+          const alreadySubmitted = await checkServerForCorrectAnswer(userId);
+  
+          if (alreadySubmitted) {
+              message.textContent = 'Du har allerede svart riktig i dag.';
+          } else if (inputGuess === correctAnswer.toLowerCase()) {
+              message.textContent = 'Gratulerer! ' + correctAnswer + ' er riktig.';
+              triggerConfetti();
+              revealAnswerToPage();
+              updateUserScore(userPoints, currentUserUsername);
+              displayLeaderboard();
+              hasSubmittedCorrectAnswer = true;
+  
+              // Mark on the server that the user has submitted a correct answer for the current day
+              markUserAsSubmittedCorrectAnswer(userId);
+          } else {
+              message.textContent = inputGuess + ' er feil. Prøv igjen.';
+          }
+          document.querySelector('#guessInput').value = '';
+      } catch (error) {
+          console.error("Error checking server:", error);
+      }
+  }
+  
+  // Dummy function, replace it with your actual function to get the user ID
+  function getUserId() {
+      // Assuming you have a user ID stored globally or retrieved from authentication
+      return userUID;
+  }
+  
+  const usersRef = ref(db, 'usersAnswer');
+  
+  async function checkServerForCorrectAnswer(userId) {
+      try {
+          const userSnapshot = await get(child(usersRef, userId));
+  
+          if (userSnapshot.exists()) {
+              // Check if the user has submitted a correct answer
+              return userSnapshot.val().hasSubmittedCorrectAnswer || false;
+          }
+  
+          return false;
+      } catch (error) {
+          console.error("Error checking server:", error);
+          throw error;
+      }
+  }
+  
+  async function markUserAsSubmittedCorrectAnswer(userId) {
+      try {
+          // Mark the user as submitted a correct answer in the Realtime Database
+          update(child(usersRef, userId), { hasSubmittedCorrectAnswer: true });
+          console.log(`Marking user ${userId} as submitted a correct answer on the server.`);
+      } catch (error) {
+          console.error("Error marking user on the server:", error);
+          throw error;
+      }
+  }
+  async function markUserAsNotSubmittedCorrectAnswer(userId) {
+    try {
+        // Mark the user as not submitted a correct answer for the current day in the Realtime Database
+        update(child(usersRef, userId), { hasSubmittedCorrectAnswer: false });
+        console.log(`Marking user ${userId} as not submitted a correct answer on the server.`);
+    } catch (error) {
+        console.error("Error marking user on the server:", error);
+        throw error;
     }
-      document.querySelector('#guessInput').value = '';
-    } 
-    
-    /*const guessButton = document.querySelector("#submitGuess");
-    guessButton.addEventListener('click', checkGuess);*/
-    
+}
+
+const resetKnapp = document.getElementById("testeReset");
+resetKnapp.addEventListener("click", () => {
+    const userId = getUserId();  // Replace with your actual function to get the user ID
+    markUserAsNotSubmittedCorrectAnswer(userId);
+});
   
     
     
@@ -306,9 +386,11 @@ function displayLeaderboard() {
   
     function revealAnswerToPage(){
       const videoContainer = document.getElementById("revealAnswer");
+      
       if (revealAnswer){
         videoContainer.innerHTML = revealAnswer;
         videoContainer.style.display = 'block';
+        
     } else{
         videoContainer.style.display = 'none';
     }
