@@ -22,9 +22,11 @@
             <a href="index.html"> <button class="page_btn" id="page_btn">Dagens oppgave</button></a>
         </div>    
         <div class="nav_btns_right">
-            <button class="login_btn" onclick = "document.getElementById('signInModal').style.display='block'" >Login</button>
-            <button class="signup_btn" onclick = "document.getElementById('registerModal').style.display='block'">Register</button> 
-        </div>
+          <div id="user-username"></div>
+          <button id="login_menu"class="login_btn" onclick = "document.getElementById('signInModal').style.display='block'" >Login</button>
+          <button id="register_menu"class="signup_btn" onclick = "document.getElementById('registerModal').style.display='block'">Register</button>
+          <button id="logout-btn" style="display: none;" onclick="logout()">Logout</button> 
+      </div>
         <div class="dropdown-menu">
           <button class="dropbtn"><i class="fas fa-bars"></i></button>
           <div class="dropdown-content">
@@ -102,10 +104,10 @@
   <div id="gameboard">
     
     <div class="card">
-      <div id="user-username"></div>
+      
       <div class="card_body">
 
-        <h2 id="opgHeadYesterday">Luke 1</h2><div id="user-username"></div>
+        <h2 id="opgHeadYesterday">Luke 1</h2>
           <audio controls id="songYesterday"><source id="audioSource" src="" type="audio/mp3" ></audio>
           
           
@@ -131,12 +133,13 @@
 
 
 
-     <script type="module" src="JS/firebase.js"></script> 
-    <script type="module" src="JS/firebaseauth.js"></script>
+     <!--<script type="module" src="JS/firebase.js"></script>-->
+    <!--<script type="module" src="JS/firebaseauth.js"></script>-->
     <!--<script type="module" src="JS/oppgaver.js"></script>-->
     <!--<script type="module" src="JS/appoppgaver.js"></script>-->
     <script src="JS/stylings.js"></script>
-    <script type="module" src="JS/leaderboard.js"></script>
-    <script type="module" src="JS/yesterday.js"></script> 
+    
+    <script type="module" src="JS/yesterday.js"></script>
+    <script type="module" src="JS/samlescript.js"></script> 
 </body>
 </html>
