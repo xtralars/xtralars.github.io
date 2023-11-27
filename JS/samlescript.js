@@ -1,6 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js'
 import { getDatabase, set, ref, get, child, update } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js';
 import { getStorage, getDownloadURL, ref as storageRef } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-storage.js';
 
 
@@ -36,7 +36,7 @@ onAuthStateChanged(auth, (user) => {
     
     currentUserUsername = user.displayName; // assuming you set the display name during registration
     userUID = user.uid;
-    updateContentForCurrentDay();
+    
 
     // Display the username on the page
     document.getElementById('user-username').textContent = `Hei, ${currentUserUsername}`;
@@ -45,6 +45,8 @@ onAuthStateChanged(auth, (user) => {
     logoutBtn.style.display = 'block';
     opgCard.style.display = 'block';
     notLog.style.display = 'none';
+
+    updateContentForCurrentDay();
   } else {
     // User is signed out
     document.getElementById('user-username').textContent = 'Du er ikke logget inn';
@@ -67,6 +69,23 @@ function logout() {
   });
 }
 
+async function resetPassword(email) {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    alert('Reset passord mail sendt!');
+  } catch (error) {
+    console.error('Password reset email error:', error);
+    alert('Error sending password reset email. Please try again.');
+  }
+}
+// Event listener for the "Forgot Password?" link
+document.getElementById("resetPwrdLink").addEventListener("click", () => {
+  const email = prompt("Skriv inn din epost:");
+  if (email) {
+    resetPassword(email);
+  }
+});
+
 async function authFirebase(email, password, username, isRegister) {
   try {
     const authFunction = isRegister
@@ -85,7 +104,7 @@ async function authFirebase(email, password, username, isRegister) {
       await updateProfile(user, {displayName: username});
     }
 
-    updateContentForCurrentDay();
+    
     
 
     // Registration/Login and data storage successful
@@ -202,46 +221,60 @@ function displayLeaderboard() {
   
   // Function to update the content for the current day
   async function updateContentForCurrentDay() {
-      const currentDate = new Date();
-      const currentDay = currentDate.getDate(); // Get the current day of the month
+    console.log("Updating content for the current day.");
 
-      // Reset the flag when updating content for a new day
-      hasSubmittedCorrectAnswer = false;
-  
-      // Update the day number in the container's title
-      document.getElementById("opgHead").textContent = `Luke ${currentDay}`;
-  
-      const dayRef = ref(db, `days/day${currentDay}`);
-  
-      const snapshot = await get(dayRef);
-  
-      if (snapshot.exists()) {
-          const dayData = snapshot.val();
-          document.getElementById("opgText").textContent = dayData.quizText;
-          document.getElementById("hintText1").textContent = dayData.hints.hint1;
-          document.getElementById("hintText2").innerHTML = dayData.hints.hint2;
-  
-          correctAnswer = dayData.correctAnswer;
-          revealAnswer = dayData.revealAnswer;
-  
-          // Get the download URL for the audio file from Firebase Storage
-          const audioFileRef = dayData.audioFileRef;
-          const audioURL = await getDownloadURL(storageRef(storage, audioFileRef));
-  
-          const audioElement = document.getElementById("song");
-          audioElement.src = audioURL;
-  
-          // Get fasit from database
-  
-          const videoContainer = document.getElementById("revealAnswer");
-          videoContainer.src = revealAnswer;
+    const userId = getUserId();
+    console.log(userId);
 
-        // Mark on the server that the user has not submitted a correct answer for the current day
-        const userId = getUserId();
-        markUserAsNotSubmittedCorrectAnswer(userId);
-      }
-  }
-  
+    try {
+        const alreadySubmitted = await checkServerForCorrectAnswer(userId);
+
+        if (!alreadySubmitted) {
+            await markUserAsNotSubmittedCorrectAnswer(userId);
+            console.log('Value set to false');
+        } else {
+            console.log('Value not set to false');
+        }
+
+        proceedWithContentUpdate(userId);
+    } catch (error) {
+        console.error('Error in updateContentForCurrentDay:', error);
+    }
+}
+
+async function proceedWithContentUpdate(userId) {
+    const currentDate = new Date();
+    const currentDay = currentDate.getDate(); // Get the current day of the month
+
+    // Update the day number in the container's title
+    document.getElementById("opgHead").textContent = `Luke ${currentDay}`;
+
+    const dayRef = ref(db, `days/day${currentDay}`);
+    const snapshot = await get(dayRef);
+
+    if (snapshot.exists()) {
+        const dayData = snapshot.val();
+        document.getElementById("opgText").textContent = dayData.quizText;
+        document.getElementById("hintText1").textContent = dayData.hints.hint1;
+        document.getElementById("hintText2").innerHTML = dayData.hints.hint2;
+
+        correctAnswer = dayData.correctAnswer;
+        revealAnswer = dayData.revealAnswer;
+
+        // Get the download URL for the audio file from Firebase Storage
+        const audioFileRef = dayData.audioFileRef;
+        const audioURL = await getDownloadURL(storageRef(storage, audioFileRef));
+
+        const audioElement = document.getElementById("song");
+        audioElement.src = audioURL;
+
+        // Get fasit from the database
+
+        const videoContainer = document.getElementById("revealAnswer");
+        videoContainer.src = revealAnswer;
+    }
+}
+
   // Call the function to update content for the current day
   
   
@@ -289,20 +322,26 @@ function displayLeaderboard() {
   const usersRef = ref(db, 'usersAnswer');
   
   async function checkServerForCorrectAnswer(userId) {
-      try {
-          const userSnapshot = await get(child(usersRef, userId));
-  
-          if (userSnapshot.exists()) {
-              // Check if the user has submitted a correct answer
-              return userSnapshot.val().hasSubmittedCorrectAnswer || false;
-          }
-  
-          return false;
-      } catch (error) {
-          console.error("Error checking server:", error);
-          throw error;
-      }
-  }
+    try {
+        const userSnapshot = await get(child(usersRef, userId));
+
+        if (userSnapshot.exists()) {
+            // Check if the user has submitted a correct answer
+            const hasSubmittedCorrectAnswer = userSnapshot.val().hasSubmittedCorrectAnswer || false;
+            console.log('hasSubmittedCorrectAnswer:', hasSubmittedCorrectAnswer);
+
+            // Add this log for additional debugging
+            console.log('userSnapshot.val():', userSnapshot.val());
+
+            return hasSubmittedCorrectAnswer;
+        }
+
+        return false;
+    } catch (error) {
+        console.error('Error checking server:', error);
+        throw error;
+    }
+}
   
   async function markUserAsSubmittedCorrectAnswer(userId) {
       try {
