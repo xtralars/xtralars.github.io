@@ -31,15 +31,18 @@ onAuthStateChanged(auth, (user) => {
   const logoutBtn = document.getElementById('logout-btn');
   const opgCard = document.getElementById('opgCard');
   const notLog = document.getElementById('notLog');
+
   if (user) {
     // User is signed in
-    
-    currentUserUsername = user.displayName; // assuming you set the display name during registration
     userUID = user.uid;
-    
 
-    // Display the username on the page
-    document.getElementById('user-username').textContent = `Hei, ${currentUserUsername}`;
+    const userRef = child(dbref, `users/${user.uid}`);
+    get(userRef).then((snapshot) => {
+      const userData = snapshot.val();
+      currentUserUsername = userData ? userData.displayName : "Unknown User";
+      document.getElementById('user-username').textContent = `Hei, ${currentUserUsername}`;
+    });
+
     loginBtn.style.display = 'none';
     registerBtn.style.display = 'none';
     logoutBtn.style.display = 'block';
@@ -49,6 +52,7 @@ onAuthStateChanged(auth, (user) => {
     updateContentForCurrentDay();
   } else {
     // User is signed out
+    currentUserUsername = null;
     document.getElementById('user-username').textContent = 'Du er ikke logget inn';
 
     loginBtn.style.display = 'block';
@@ -56,8 +60,6 @@ onAuthStateChanged(auth, (user) => {
     logoutBtn.style.display = 'none';
     opgCard.style.display = 'none';
     notLog.style.display = 'block';
-
-    
   }
 });
 function logout() {
@@ -92,19 +94,20 @@ async function authFirebase(email, password, username, isRegister) {
       ? createUserWithEmailAndPassword(auth, email, password)
       : signInWithEmailAndPassword(auth, email, password);
 
-    const userCredential = await authFunction;
-    const user = userCredential.user;
-    userUID = user.uid;
-    currentUserUsername = user.username;
+      const userCredential = await authFunction;
+      const user = userCredential.user;
+      userUID = user.uid;
+      currentUserUsername = user.displayName; // Corrected line
+      
+      if (isRegister) {
+        // Additional registration logic if needed
+        const userRef = child(dbref, `users/${user.uid}`);
+        await set(userRef, { uid: user.uid, username, displayName: username }); // Store UID and username
+        await updateProfile(user, { displayName: username });
+      }
 
-    if (isRegister) {
-      // Additional registration logic if needed
-      const userRef = child(dbref, `users/${user.uid}`);
-      await set(userRef, { uid: user.uid, username, displayName: username }); // Store UID and username
-      await updateProfile(user, {displayName: username});
-    }
+      
 
-    
     
 
     // Registration/Login and data storage successful
@@ -115,6 +118,9 @@ async function authFirebase(email, password, username, isRegister) {
     console.log(user.uid);
     console.log(currentUserUsername);
     console.log(userUID);
+    if(isRegister){
+      window.location.href = 'index.html';
+    }
   } catch (error) {
     console.error(isRegister ? 'Registration error:' : 'Login error:', error);
   }
@@ -142,6 +148,7 @@ function handleAuthButtonClick(isRegister) {
 // Set up event listeners
 document.getElementById("register-btn").addEventListener("click", () => {
   handleAuthButtonClick(true);
+  
 });
 
 document.getElementById("login-btn").addEventListener("click", () => {
@@ -185,27 +192,38 @@ function updateUserScore(userPoints, currentUserUsername) {
 
 
 function displayLeaderboard() {
-    const leaderboardContainer = document.getElementById("leaderboardContainer");
-  
-    get(leaderboardRef).then((snapshot) => {
-      if (snapshot.exists()) {
-        // Clear existing entries before updating
-        leaderboardContainer.innerHTML = '';
-  
-        // Iterate through leaderboard entries and display them
-        snapshot.forEach((childSnapshot) => {
-          const userData = childSnapshot.val();
-          const username = childSnapshot.key;
-          const score = userData.score;
-          
-  
-          const userEntry = document.createElement("div");
-          userEntry.textContent = `${username}: ${score} poeng`;
-          leaderboardContainer.appendChild(userEntry);
-        });
-      }
-    });
-  }
+  const leaderboardContainer = document.getElementById("leaderboardContainer");
+
+  get(leaderboardRef).then((snapshot) => {
+    if (snapshot.exists()) {
+      // Clear existing entries before updating
+      leaderboardContainer.innerHTML = '';
+
+      // Create an array to store leaderboard entries
+      const leaderboardEntries = [];
+
+      // Iterate through leaderboard entries and push them to the array
+      snapshot.forEach((childSnapshot) => {
+        const userData = childSnapshot.val();
+        const username = childSnapshot.key;
+        const score = userData.score;
+
+        leaderboardEntries.push({ username, score });
+      });
+
+      // Sort the entries in descending order based on score
+      leaderboardEntries.sort((a, b) => b.score - a.score);
+
+      // Iterate through sorted leaderboard entries and display them with ranking numbers
+      leaderboardEntries.forEach((entry, index) => {
+        const userEntry = document.createElement("div");
+        userEntry.textContent = `${index + 1}. ${entry.username}: ${entry.score} poeng`;
+        leaderboardContainer.appendChild(userEntry);
+      });
+    }
+  });
+}
+
   
   // ...
   
@@ -245,12 +263,15 @@ function displayLeaderboard() {
 async function proceedWithContentUpdate(userId) {
     const currentDate = new Date();
     const currentDay = currentDate.getDate(); // Get the current day of the month
+    markUserAsNotSubmittedCorrectAnswer(userId);
 
     // Update the day number in the container's title
     document.getElementById("opgHead").textContent = `Luke ${currentDay}`;
 
-    const dayRef = ref(db, `days/day${currentDay}`);
+    const dayRef = ref(db, `days/Day${currentDay}`);
     const snapshot = await get(dayRef);
+
+    
 
     if (snapshot.exists()) {
         const dayData = snapshot.val();
