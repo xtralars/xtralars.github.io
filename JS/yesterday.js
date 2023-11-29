@@ -72,7 +72,7 @@ function revealAnswerToPageYesterday(){
     let visFasit = document.getElementById("correctAnswerYesterday");
     if (revealAnswerYesterday){
       videoContainer.innerHTML = revealAnswerYesterday;
-      visFasit.innerHTML = correctAnswerYesterday;
+      visFasit.innerHTML = "Riktig svar var: " + correctAnswerYesterday;
       videoContainer.style.display = 'block';
       visFasit.style.display = 'block';
   } else{
