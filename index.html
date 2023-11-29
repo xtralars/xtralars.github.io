@@ -11,20 +11,23 @@
 </head>
 <body>
   
-
+  
     <div id="pagetop">
+      
         <div class="nav_btns_left">
             <button id="darkModeButton"><i class="fas fa-moon"></i></button>
             <button id="infoButton" onclick = "document.getElementById('infoModal').style.display='block'"><i class="fas fa-question"></i></button>
-            <div id="user-username" class="brukernavn"></div>
+            
             
         </div>
         <div class="nav_btns_center">
             <button class="leaderboard_btn" id="leaderboard_btn" onclick = "document.getElementById('leaderboardModal').style.display='block'" >Leaderboard</button>
+            
             <a href="yesterday.html"> <button class="page_btn" id="page_btn">Gårsdagens oppgave</button></a>
+            
         </div>    
         <div class="nav_btns_right">
-            
+          <div id="user-username" class="brukernavn"></div>
             <button id="login_menu"class="login_btn" onclick = "document.getElementById('signInModal').style.display='block'" >Login</button>
             <button id="register_menu"class="signup_btn" onclick = "document.getElementById('registerModal').style.display='block'">Register</button>
 
@@ -61,10 +64,11 @@
       <form class="modal-content" id="registration-form">
         <div class="container">
           <!-- Username -->
-          <h3>Register:</h3>
-          <input type="text" id="username" placeholder="Username" required />
-        <input type="email" id="email" placeholder="Email" required />
-        <input type="password" id="password" placeholder="Password" required />
+          <h3>Registrer bruker:</h3>
+          <input type="text" id="username" placeholder="Brukernavn" required />
+        <input type="email" id="email" placeholder="din@epost.no" required />
+        <input type="password" id="password" placeholder="Passord" required />
+        <input type="password" id="confPassword" placeholder="Bekreft Passord" required />
         <button type="button" id="register-btn">Registrer</button>
           
           
@@ -80,8 +84,8 @@
           <!-- Username -->
           <h3>Om kalenderen:</h3>
           <h5>Ny oppgave hver dag.<br><br>
-              Dersom du gjetter feil 10 ganger, vil du få opp en knapp med et hint.<br>
-              Etter 20 forsøk, vil du få enda en knapp med hint.<br><br>
+              Hver dag starter du med 3 poeng.<br>
+              For hvert hint du bruker, trekkes det fra 1 poeng.<br><br>
               Med mindre det er spesifisert, så skal vi frem til låttittel. Små og store bokstaver er tatt høyde for, så det spiller ingen rolle.<br>
               Det betyr at både "stairway to heaven", "Stairway To Heaven" og "StAiRwAy To HeAvEn" er godkjente svar.
           </h5>

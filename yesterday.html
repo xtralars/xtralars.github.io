@@ -7,6 +7,7 @@
     <title>Musikkjulekalender</title>
     <link rel="stylesheet" type="text/css" href="CSS/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script type="modal" src="JS/firebase.js"></script>
 </head>
 <body>
   
@@ -22,7 +23,7 @@
             <a href="index.html"> <button class="page_btn" id="page_btn">Dagens oppgave</button></a>
         </div>    
         <div class="nav_btns_right">
-          <div id="user-username"></div>
+          <div id="user-username" class="brukernavn"></div>
           <button id="login_menu"class="login_btn" onclick = "document.getElementById('signInModal').style.display='block'" >Login</button>
           <button id="register_menu"class="signup_btn" onclick = "document.getElementById('registerModal').style.display='block'">Register</button>
           <button id="logout-btn" class="logout_btn" style="display: none;" onclick="logout()">Logout</button> 
@@ -103,7 +104,7 @@
 
   <div id="gameboard">
     
-    <div class="card">
+    <div id="yesterdayCard" class="card">
       
       <div class="card_body">
 
@@ -114,7 +115,7 @@
 
           <p id="opgTextYesterday">Oppgave tekst</p>   
           
-          <button id="visSvarBtn">Vis svar</button>
+          <button id="visSvarBtn" class="submitGuess">Vis svar</button>
             <p id="correctAnswerYesterday" class="hidden"></p>
                 
             <div id="revealAnswerYesterday" class="hidden"></div>
@@ -125,11 +126,11 @@
 
             
             
-        </div>
-                           
       </div>
+                           
+    </div>
   </div>
-  </div>
+  
 
 
 
