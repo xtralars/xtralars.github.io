@@ -16,6 +16,7 @@
         <div class="nav_btns_left">
             <button id="darkModeButton"><i class="fas fa-moon"></i></button>
             <button id="infoButton" onclick = "document.getElementById('infoModal').style.display='block'"><i class="fas fa-question"></i></button>
+            <div id="user-username" class="brukernavn"></div>
             
         </div>
         <div class="nav_btns_center">
@@ -23,7 +24,7 @@
             <a href="yesterday.html"> <button class="page_btn" id="page_btn">Gårsdagens oppgave</button></a>
         </div>    
         <div class="nav_btns_right">
-            <div id="user-username"></div>
+            
             <button id="login_menu"class="login_btn" onclick = "document.getElementById('signInModal').style.display='block'" >Login</button>
             <button id="register_menu"class="signup_btn" onclick = "document.getElementById('registerModal').style.display='block'">Register</button>
 
@@ -49,7 +50,7 @@
           <input type="email" id="login-email" placeholder="Email" required />
         <input type="password" id="login-password" placeholder="Password" required />
         <button type="button" id="login-btn">Login</button>
-          <p id="register">New user? Click here to <a href="#"onclick = "document.getElementById('registerModal').style.display='block'">register.</a></p>
+          <p id="register">Ny bruker? <a href="#"onclick = "document.getElementById('registerModal').style.display='block'">Registrer her</a></p>
           <p id="resetPwrd">Glemt passord? <a id="resetPwrdLink" href="#">Trykk Her</a></p>
         </div>
       </form>
@@ -64,7 +65,7 @@
           <input type="text" id="username" placeholder="Username" required />
         <input type="email" id="email" placeholder="Email" required />
         <input type="password" id="password" placeholder="Password" required />
-        <button type="button" id="register-btn">Register</button>
+        <button type="button" id="register-btn">Registrer</button>
           
           
           
@@ -107,28 +108,29 @@
 
   <div id="gameboard">
     <div id="notLog" class="notLogText">Du må logge inn for å se oppgaven</br><button id="login_menu"class="login_btn" onclick = "document.getElementById('signInModal').style.display='block'" >Login</button> eller 
-      <button id="register_menu"class="signup_btn" onclick = "document.getElementById('registerModal').style.display='block'">Register</button></div>
+      <button id="register_menu"class="signup_btn" onclick = "document.getElementById('registerModal').style.display='block'">Registrer</button>
+    </div>
     <div id="opgCard"class="card">
-      <div id="user-username"></div>
+      
       <div class="card_body">
 
-        <h2 id="opgHead">Luke 1</h2><div id="user-username"></div>
+        <h2 id="opgHead">Luke 1</h2>
           <audio controls id="song"><source id="audioSource" src="" type="audio/mp3" ></audio>
           
           
 
           <p id="opgText">Oppgave tekst</p>          
           
-            <button id="hintBtn1">Hint 1</button>
+            <button id="hintBtn1" class="hintBtn">Hint 1</button>
             <p id="hintText1" class="hidden"></p>
-            <button id="hintBtn2">Hint 2</button>                   
+            <button id="hintBtn2" class="hintBtn">Hint 2</button>                   
             <div id="hintText2" class="hidden"></div>
           
           
           <div class="form">
             <form>
               <input type="text" id="guessInput">
-              <button id="submitGuess">Svar</button><br>
+              <button id="submitGuess" class="submitGuess">Svar</button><br>
               
                 <p id="message"></p>
                 <p id="pointsDisplay">Foreløpig poeng i dag: 3</p>
@@ -139,12 +141,13 @@
 
 
             </form>
+          </div>
             
-        </div>
-                   <button id="testeReset">Reset</button>        
+        
       </div>
   </div>
   </div>
+  
 
 
 
