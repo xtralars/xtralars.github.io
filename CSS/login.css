@@ -2,16 +2,18 @@
     --primary-color: #c56058;
     --secondary-color:#dfdedf;
     --tertiery-color: #7f97a8;
-    --accent-color: #aaa18e;
+    --accent-color: #92aa8e;
     --text-color:   #dfdedf;
     --pink-color: #e9c7c2;
-    --dark-mode: #30393f;
+    --dark-mode: #3d063a;
   }
 body{
     padding: 0;
     margin: 0;
-    height: 100%;
-    background: linear-gradient(0deg, #bec0c5, rgb(92, 182, 228));
+    height: 100vh;
+    background-image: url(vinter.jpg);
+    background-size: cover;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
   .modal {
@@ -79,10 +81,10 @@ input[type=text], input[type=password], input[type=email] {
     }
     /* Set a style for all buttons */
     button {
-    background-color: #4CAF50;
-    color: white;
+    background-color: var(--accent-color);
+    color: var(--text-color);
     padding: 14px 20px;
-    margin: 8px 0;
+    margin: 8px 2px;
     border: none;
     cursor: pointer;
     width: 100%;
@@ -115,29 +117,31 @@ input[type=text], input[type=password], input[type=email] {
     }
 
     .dark_mode{
-        background-color: rgb(38, 38, 55);
-        color: white;
+        background-image: url(weinacht.jpg);
+        color: var(--text-color);
+        
         
     }
-    body{
-        background-color: white;
-    }
+    
 
 
     #pagetop {
         position: relative;
         color: #fff; /* Set the text color */
         padding: 10px; /* Add padding to the top bar */
-        border-bottom: 1px solid black;
+        
         max-width: 640px;
         margin: auto;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-direction: row;
+        
+        
         
     }
     
-  
+ 
     
     
     
@@ -164,6 +168,9 @@ input[type=text], input[type=password], input[type=email] {
         
     }
     
+    .nav_btns_center, .nav_btns_right, .nav_btns_left{
+        display: flex;
+    }
     
     .leaderboard_btn, .page_btn{
         
@@ -171,15 +178,25 @@ input[type=text], input[type=password], input[type=email] {
         padding: 5px 10px;
         cursor: pointer;
         width: 100px;
+        height: 40px;
         margin: auto;
+        display: flex;
         
+        align-items: center;
+        justify-content: space-between;
         
 
     }
-    
+    a{
+        text-decoration: none;
+      }
+    .brukernavn{
+        display: flex;
+    }
     .login_btn,
-    .signup_btn {
-        
+    .signup_btn,
+    .logout_btn {
+        display: flex;
         color: #fff; /* Set the text color of login and signup buttons */
         border: none;
         padding: 5px 10px;
@@ -187,7 +204,32 @@ input[type=text], input[type=password], input[type=email] {
         border-radius: 16px;
         margin-left: 0;
         width: auto;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: var(--text-color);
         
+    }
+
+    .hintBtn{
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 16px;
+        margin-left: 0;
+        width: 100px;
+    }
+    #submitGuess{
+        background-color: var(--accent-color);
+    color: var(--text-color);
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    border-radius: 20px;
+    
+
+
     }
       
 /*dropdown menu*/
@@ -248,7 +290,7 @@ input[type=text], input[type=password], input[type=email] {
 
 
 
-      #gameboard {
+      #gameboard  {
         display: flex;
         justify-content: space-around;
         /*align-items: baseline;*/
@@ -258,9 +300,29 @@ input[type=text], input[type=password], input[type=email] {
         gap: 2rem;
         
         /*flex-basis: 0;*/
-        max-width: 100px;
+        max-width: 640px;
         margin: auto;
-        height: 100vh;
+            
+                     
+      }
+      .card {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap-reverse;
+        text-align: center;
+        padding: 10px;
+        gap: 2rem;
+        
+        /*flex-basis: 0;*/
+        max-width: 640px;
+        margin: auto;
+        margin-top: 0;
+        height: auto;
+      }
+      .notLogText{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
       }
 
       
@@ -286,3 +348,5 @@ input[type=text], input[type=password], input[type=email] {
         clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
         animation: confetti 4s ease-out;
       }
+
+     
