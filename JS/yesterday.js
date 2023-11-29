@@ -1,6 +1,7 @@
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js';
-import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js';
-import { getStorage, getDownloadURL, ref as storageRef } from 'https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js'
+import { getDatabase, set, ref, get, child, update } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js';
+import { getStorage, getDownloadURL, ref as storageRef } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-storage.js';
 
 
 
@@ -26,17 +27,19 @@ const currentDate = new Date();
 currentDate.setDate(currentDate.getDate() - 1); // Subtract 1 day to get yesterday's date
 const yesterday = currentDate.getDate();
 
+
 // ...
 
 // Function to update the content for yesterday
 async function updateContentForYesterday() {
-    const yesterdayRef = ref(db, `days/day${yesterday}`);
+    
+    const yesterdayRef = ref(db, `days/Day${yesterday}`);
     const snapshot = await get(yesterdayRef);
 
     if (snapshot.exists()) {
         const yesterdayData = snapshot.val();
         // Update the HTML elements with yesterday's content
-        document.getElementById("opgHeadYesterday").textContent = `Day ${yesterday}`;
+        document.getElementById("opgHeadYesterday").textContent = `Fasit Luke ${yesterday}`;
         document.getElementById("opgTextYesterday").textContent = yesterdayData.quizText;
        
         document.getElementById("correctAnswerYesterday").innerHTML = yesterdayData.correctAnswer;

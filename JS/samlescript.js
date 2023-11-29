@@ -40,7 +40,7 @@ onAuthStateChanged(auth, (user) => {
     get(userRef).then((snapshot) => {
       const userData = snapshot.val();
       currentUserUsername = userData ? userData.displayName : "Unknown User";
-      document.getElementById('user-username').textContent = `Hei, ${currentUserUsername}`;
+      document.getElementById('user-username').textContent = `God Jul, ${currentUserUsername}`;
     });
 
     loginBtn.style.display = 'none';
@@ -50,6 +50,7 @@ onAuthStateChanged(auth, (user) => {
     notLog.style.display = 'none';
 
     updateContentForCurrentDay();
+    
   } else {
     // User is signed out
     currentUserUsername = null;
@@ -385,11 +386,7 @@ async function proceedWithContentUpdate(userId) {
     }
 }
 
-const resetKnapp = document.getElementById("testeReset");
-resetKnapp.addEventListener("click", () => {
-    const userId = getUserId();  // Replace with your actual function to get the user ID
-    markUserAsNotSubmittedCorrectAnswer(userId);
-});
+
   
     
     
@@ -459,4 +456,7 @@ resetKnapp.addEventListener("click", () => {
   
   
   
-  
+    updateContentForYesterday();
+
+
+    
