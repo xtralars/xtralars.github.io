@@ -304,7 +304,7 @@ async function proceedWithContentUpdate(userId) {
   
   async function checkGuess() {
       event.preventDefault();
-      const inputGuess = document.querySelector('#guessInput').value.toLowerCase();
+      const inputGuess = document.querySelector('#guessInput').value.toLowerCase().trim();
       const message = document.querySelector('#message');
   
       // Assuming you have a user ID
